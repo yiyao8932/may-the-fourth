@@ -11,61 +11,135 @@ import MockAdapter from "axios-mock-adapter";
 
 const mock = new MockAdapter(axios);
 
-mock.onGet(new RegExp(`${SWAPI_URL}/*`)).reply(200, {
+mock
+  .onGet(`${SWAPI_URL}`)
+  .replyOnce(200, {
+    count: 82,
+    next: "https://swapi.dev/api/people/?page=2",
+    previous: null,
+    results: [
+      {
+        name: "Sly Moore",
+        height: "178",
+        mass: "48",
+        hair_color: "none",
+        skin_color: "pale",
+        eye_color: "white",
+        birth_year: "unknown",
+        gender: "female",
+        homeworld: "https://swapi.dev/api/planets/60/",
+        films: [
+          "https://swapi.dev/api/films/5/",
+          "https://swapi.dev/api/films/6/"
+        ],
+        species: [],
+        vehicles: [],
+        starships: [],
+        created: "2014-12-20T20:18:37.619000Z",
+        edited: "2014-12-20T21:17:50.496000Z",
+        url: "https://swapi.dev/api/people/82/"
+      },
+      {
+        name: "Tion Medon",
+        height: "206",
+        mass: "80",
+        hair_color: "none",
+        skin_color: "grey",
+        eye_color: "black",
+        birth_year: "unknown",
+        gender: "male",
+        homeworld: "https://swapi.dev/api/planets/12/",
+        films: ["https://swapi.dev/api/films/6/"],
+        species: ["https://swapi.dev/api/species/37/"],
+        vehicles: [],
+        starships: [],
+        created: "2014-12-20T20:35:04.260000Z",
+        edited: "2014-12-20T21:17:50.498000Z",
+        url: "https://swapi.dev/api/people/83/"
+      }
+    ]
+  })
+  .onGet(`${SWAPI_URL}`)
+  .replyOnce(500);
+
+mock.onGet(`${SWAPI_URL}?page=2`).reply(200, {
   count: 82,
   next: null,
-  previous: "https://swapi.dev/api/people/?page=8",
+  previous: SWAPI_URL,
   results: [
     {
-      name: "Sly Moore",
-      height: "178",
-      mass: "48",
-      hair_color: "none",
-      skin_color: "pale",
-      eye_color: "white",
-      birth_year: "unknown",
-      gender: "female",
-      homeworld: "https://swapi.dev/api/planets/60/",
+      name: "Luke Skywalker",
+      height: "172",
+      mass: "77",
+      hair_color: "blond",
+      skin_color: "fair",
+      eye_color: "blue",
+      birth_year: "19BBY",
+      gender: "male",
+      homeworld: "https://swapi.dev/api/planets/1/",
       films: [
-        "https://swapi.dev/api/films/5/",
+        "https://swapi.dev/api/films/1/",
+        "https://swapi.dev/api/films/2/",
+        "https://swapi.dev/api/films/3/",
         "https://swapi.dev/api/films/6/"
       ],
       species: [],
-      vehicles: [],
-      starships: [],
-      created: "2014-12-20T20:18:37.619000Z",
-      edited: "2014-12-20T21:17:50.496000Z",
-      url: "https://swapi.dev/api/people/82/"
+      vehicles: [
+        "https://swapi.dev/api/vehicles/14/",
+        "https://swapi.dev/api/vehicles/30/"
+      ],
+      starships: [
+        "https://swapi.dev/api/starships/12/",
+        "https://swapi.dev/api/starships/22/"
+      ],
+      created: "2014-12-09T13:50:51.644000Z",
+      edited: "2014-12-20T21:17:56.891000Z",
+      url: "https://swapi.dev/api/people/1/"
     },
     {
-      name: "Tion Medon",
-      height: "206",
-      mass: "80",
-      hair_color: "none",
-      skin_color: "grey",
-      eye_color: "black",
-      birth_year: "unknown",
-      gender: "male",
-      homeworld: "https://swapi.dev/api/planets/12/",
-      films: ["https://swapi.dev/api/films/6/"],
-      species: ["https://swapi.dev/api/species/37/"],
+      name: "R2-D2",
+      height: "96",
+      mass: "32",
+      hair_color: "n/a",
+      skin_color: "white, blue",
+      eye_color: "red",
+      birth_year: "33BBY",
+      gender: "n/a",
+      homeworld: "https://swapi.dev/api/planets/8/",
+      films: [
+        "https://swapi.dev/api/films/1/",
+        "https://swapi.dev/api/films/2/",
+        "https://swapi.dev/api/films/3/",
+        "https://swapi.dev/api/films/4/",
+        "https://swapi.dev/api/films/5/",
+        "https://swapi.dev/api/films/6/"
+      ],
+      species: ["https://swapi.dev/api/species/2/"],
       vehicles: [],
       starships: [],
-      created: "2014-12-20T20:35:04.260000Z",
-      edited: "2014-12-20T21:17:50.498000Z",
-      url: "https://swapi.dev/api/people/83/"
+      created: "2014-12-10T15:11:50.376000Z",
+      edited: "2014-12-20T21:17:50.311000Z",
+      url: "https://swapi.dev/api/people/3/"
     }
   ]
 });
 
 describe("getStarWarsCharacters function", () => {
-  it("should return", async () => {
+  it("should return a list of characters when the response is 200", async () => {
     const characters = await getStarWarsCharacters();
 
     expect(characters).toEqual([
       { name: "Sly Moore", height: "178", gender: "female" },
-      { name: "Tion Medon", height: "206", gender: "male" }
+      { name: "Tion Medon", height: "206", gender: "male" },
+      { name: "Luke Skywalker", height: "172", gender: "male" },
+      { name: "R2-D2", height: "96", gender: "n/a" }
     ]);
+  });
+
+  it("should return an empty list of characters when the response is 500", async () => {
+    const characters = await getStarWarsCharacters();
+
+    expect(characters).toEqual([]);
   });
 });
 
