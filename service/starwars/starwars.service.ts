@@ -37,11 +37,10 @@ export async function getStarWarsCharacters(): Promise<Character[]> {
         hasNext = false;
       }
     }
-    return allCharacters;
   } catch (error) {
     logger.error("Error fetching Star Wars characters:", error);
-    return [];
   }
+  return allCharacters;
 }
 
 // Categorize Star Wars characters into genders, sort them by height.
