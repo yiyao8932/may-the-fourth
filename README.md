@@ -1,6 +1,6 @@
 # May The Fourth
 
-This TypeScript script get all characters from the Star Wars API, categorizes them based on gender, and sorts them accordingly.
+This TypeScript script gets all characters from the Star Wars API, categorizes them based on gender, and sorts them accordingly.
 
 ## Installation
 
