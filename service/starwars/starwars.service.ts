@@ -1,4 +1,5 @@
 import axios from "axios";
+import logger from "../logging/logger.service";
 
 export const SWAPI_URL = "https://swapi.dev/api/people/";
 
@@ -26,7 +27,7 @@ export async function getStarWarsCharacters(): Promise<Character[]> {
         const mappedCharacter: Character = {
           name: character.name,
           height: character.height,
-          gender: character.gender,
+          gender: character.gender
         };
         allCharacters.push(mappedCharacter);
       }
@@ -38,7 +39,7 @@ export async function getStarWarsCharacters(): Promise<Character[]> {
     }
     return allCharacters;
   } catch (error) {
-    console.error("Error fetching Star Wars characters:", error);
+    logger.error("Error fetching Star Wars characters:", error);
     return [];
   }
 }
@@ -61,7 +62,7 @@ export function categorizeAndSortCharacters(characters: Character[]): {
     }
     categorizedCharacters[character.gender].push({
       name: character.name,
-      height: character.height,
+      height: character.height
     });
   }
 
@@ -87,14 +88,14 @@ export function sortCharacters(
 
   // Partition characters by height
   for (let i = 0; i < characters.length; i++) {
-    const character = characters[i];
+    const character: CategorizedCharacter = characters[i];
     if (character.height === "unknown") {
       unknownHeightCharacters.push(character);
     } else {
-      let inserted = false;
+      let inserted: boolean = false;
       for (let j = 0; j < sortedCharacters.length; j++) {
-        const heightA = parseInt(character.height);
-        const heightB = parseInt(sortedCharacters[j].height);
+        const heightA: number = parseInt(character.height);
+        const heightB: number = parseInt(sortedCharacters[j].height);
 
         if (
           (!isNaN(heightA) && isNaN(heightB)) ||
@@ -119,7 +120,7 @@ export function sortCharacters(
           unknownHeightCharacters[j].name
         ) > 0
       ) {
-        const temp = unknownHeightCharacters[i];
+        const temp: CategorizedCharacter = unknownHeightCharacters[i];
         unknownHeightCharacters[i] = unknownHeightCharacters[j];
         unknownHeightCharacters[j] = temp;
       }

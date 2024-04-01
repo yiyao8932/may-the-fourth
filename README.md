@@ -15,13 +15,13 @@ This TypeScript script get all characters from the Star Wars API, categorizes th
 2. The script will get all characters from the Star Wars API, categorize them by gender, and sort them based on height.
 3. The sorted characters will be output into a file named `output.json` under the root directory.
 
+## Unit Test
+
+1. To run unit test, run `npm run test`.
+
 ## Script Overview
 
 - `getStarWarsCharacters()`: Function to get all characters from the Star Wars API using axios.
 - `categorizeAndSortCharacters()`: Function to categorize characters based on gender and sort them accordingly.
 - `sortCharacters()`: Function to sort characters based on height, with unknown heights sorted alphabetically by name.
 - `main()`: The entry point of the script.
-
-## Unit test
-
-1. To run unit test, run `npm run test`.

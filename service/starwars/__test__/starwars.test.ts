@@ -5,7 +5,7 @@ import {
   SWAPI_URL,
   categorizeAndSortCharacters,
   getStarWarsCharacters,
-  sortCharacters,
+  sortCharacters
 } from "../starwars.service";
 import MockAdapter from "axios-mock-adapter";
 
@@ -28,14 +28,14 @@ mock.onGet(new RegExp(`${SWAPI_URL}/*`)).reply(200, {
       homeworld: "https://swapi.dev/api/planets/60/",
       films: [
         "https://swapi.dev/api/films/5/",
-        "https://swapi.dev/api/films/6/",
+        "https://swapi.dev/api/films/6/"
       ],
       species: [],
       vehicles: [],
       starships: [],
       created: "2014-12-20T20:18:37.619000Z",
       edited: "2014-12-20T21:17:50.496000Z",
-      url: "https://swapi.dev/api/people/82/",
+      url: "https://swapi.dev/api/people/82/"
     },
     {
       name: "Tion Medon",
@@ -53,9 +53,9 @@ mock.onGet(new RegExp(`${SWAPI_URL}/*`)).reply(200, {
       starships: [],
       created: "2014-12-20T20:35:04.260000Z",
       edited: "2014-12-20T21:17:50.498000Z",
-      url: "https://swapi.dev/api/people/83/",
-    },
-  ],
+      url: "https://swapi.dev/api/people/83/"
+    }
+  ]
 });
 
 describe("getStarWarsCharacters function", () => {
@@ -64,7 +64,7 @@ describe("getStarWarsCharacters function", () => {
 
     expect(characters).toEqual([
       { name: "Sly Moore", height: "178", gender: "female" },
-      { name: "Tion Medon", height: "206", gender: "male" },
+      { name: "Tion Medon", height: "206", gender: "male" }
     ]);
   });
 });
@@ -75,7 +75,7 @@ describe("sortCharacters function", () => {
       { name: "Anakin Skywalker", height: "188" },
       { name: "Chewbacca", height: "228" },
       { name: "Luke Skywalker", height: "172" },
-      { name: "Yoda", height: "66" },
+      { name: "Yoda", height: "66" }
     ];
 
     const sortedCharacters = sortCharacters(characters);
@@ -84,7 +84,7 @@ describe("sortCharacters function", () => {
       { name: "Yoda", height: "66" },
       { name: "Luke Skywalker", height: "172" },
       { name: "Anakin Skywalker", height: "188" },
-      { name: "Chewbacca", height: "228" },
+      { name: "Chewbacca", height: "228" }
     ]);
   });
 
@@ -100,7 +100,7 @@ describe("sortCharacters function", () => {
     const characters = [
       { name: "Rey", height: "unknown" },
       { name: "R2-D2", height: "unknown" },
-      { name: "Arvel Crynyd", height: "unknown" },
+      { name: "Arvel Crynyd", height: "unknown" }
     ];
 
     const sortedCharacters = sortCharacters(characters);
@@ -108,7 +108,7 @@ describe("sortCharacters function", () => {
     expect(sortedCharacters).toEqual([
       { name: "Arvel Crynyd", height: "unknown" },
       { name: "R2-D2", height: "unknown" },
-      { name: "Rey", height: "unknown" },
+      { name: "Rey", height: "unknown" }
     ]);
   });
 
@@ -118,7 +118,7 @@ describe("sortCharacters function", () => {
       { name: "Taun We", height: "213", gender: "female" },
       { name: "Mon Mothma", height: "150", gender: "female" },
       { name: "Padmé Amidala", height: "185", gender: "female" },
-      { name: "Shmi Skywalker", height: "163", gender: "female" },
+      { name: "Shmi Skywalker", height: "163", gender: "female" }
     ];
 
     const sortedCharacters = sortCharacters(characters);
@@ -128,7 +128,7 @@ describe("sortCharacters function", () => {
       { name: "Mon Mothma", height: "150", gender: "female" },
       { name: "Shmi Skywalker", height: "163", gender: "female" },
       { name: "Padmé Amidala", height: "185", gender: "female" },
-      { name: "Taun We", height: "213", gender: "female" },
+      { name: "Taun We", height: "213", gender: "female" }
     ]);
   });
 });
@@ -144,7 +144,7 @@ describe("categorizeAndSortCharacters function", () => {
       { name: "Yoda", height: "66", gender: "male" },
       { name: "Rey", height: "unknown", gender: "female" },
       { name: "R2-D2", height: "96", gender: "unknown" },
-      { name: "Jabba Desilijic Tiure", height: "175", gender: "hermaphrodite" },
+      { name: "Jabba Desilijic Tiure", height: "175", gender: "hermaphrodite" }
     ];
 
     const sortedCharacters = categorizeAndSortCharacters(characters);
@@ -156,22 +156,22 @@ describe("categorizeAndSortCharacters function", () => {
           { name: "Yoda", height: "66" },
           { name: "Luke Skywalker", height: "172" },
           { name: "Anakin Skywalker", height: "188" },
-          { name: "Chewbacca", height: "228" },
-        ],
+          { name: "Chewbacca", height: "228" }
+        ]
       },
       {
         gender: "female",
         characters: [
           { name: "Leia Organa", height: "150" },
           { name: "Taun We", height: "213" },
-          { name: "Rey", height: "unknown" },
-        ],
+          { name: "Rey", height: "unknown" }
+        ]
       },
       { gender: "unknown", characters: [{ name: "R2-D2", height: "96" }] },
       {
         gender: "hermaphrodite",
-        characters: [{ name: "Jabba Desilijic Tiure", height: "175" }],
-      },
+        characters: [{ name: "Jabba Desilijic Tiure", height: "175" }]
+      }
     ]);
   });
 
