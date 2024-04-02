@@ -13,7 +13,9 @@ async function main() {
       gender: string;
       characters: CategorizedCharacter[];
     }[] = categorizeAndSortCharacters(characters);
+
     fs.writeFileSync("./output.json", JSON.stringify(categorizedCharacters));
+
     logger.info("The output file is generated! Please check ./output.json");
   } catch (error) {
     logger.error("An error occurred:", error);

@@ -38,7 +38,7 @@ export async function getStarWarsCharacters(): Promise<Character[]> {
       }
     }
   } catch (error) {
-    logger.error("Error fetching Star Wars characters:", error);
+    logger.error("Error fetching Star Wars characters:", error.message);
   }
   return allCharacters;
 }

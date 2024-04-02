@@ -4,7 +4,7 @@ This TypeScript script gets all characters from the Star Wars API, categorizes t
 
 ## Installation
 
-1. Make sure you have Node.js with version >= 20 installed on your machine.
+1. Make sure you have Node.js with version 20.12.0 installed on your machine.
 2. Clone this repository.
 3. Install dependencies by running `npm install`.
 4. Install ts-node globally by running `npm install ts-node -g`.
