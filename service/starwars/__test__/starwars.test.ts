@@ -11,6 +11,7 @@ import MockAdapter from "axios-mock-adapter";
 
 const mock = new MockAdapter(axios);
 
+// mock the first page data for axios
 mock
   .onGet(`${SWAPI_URL}`)
   .replyOnce(200, {
@@ -62,6 +63,7 @@ mock
   .onGet(`${SWAPI_URL}`)
   .replyOnce(500);
 
+// mock the data for next page
 mock.onGet(`${SWAPI_URL}?page=2`).reply(200, {
   count: 82,
   next: null,
